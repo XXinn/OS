@@ -11,7 +11,7 @@ package disk.software;
 public interface DiskManager {
 	public int getFreeBlockPos();
 	public int getFreeBlockNum();
-	public boolean isEnoughBlock();
-	public void storeFile(byte[]file);
-	public byte[] getFile();
+	public boolean isEnoughBlock(byte[]file);
+	public int storeFile(byte[]file); //返回存储的startPos的位置
+	public byte[] getFile(int start,int len);
 }

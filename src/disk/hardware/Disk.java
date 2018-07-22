@@ -17,7 +17,11 @@ public class Disk  implements Serializable{
 	 * @author Zhanbiao_Zhu
 	 */
 	private DiskBlock[] disk = new DiskBlock[Number.lenOfDisk];
-	
+	public Disk() {
+		for(int i =0;i<Number.lenOfDisk;i++) {
+			disk[i]= new DiskBlock();
+		}
+	}
 	public DiskBlock[] getDisk() {
 		return disk;
 	}

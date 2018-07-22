@@ -8,4 +8,11 @@ public class Number {
 	public static int lenOfDiskBlock=64;
 	public static int lenOfDisk=256;
 	public static int sizeOfUserArea=512;
+	
+	public static int byteToInt(byte num) {
+		return (num+256)%256;
+	}
+	public static byte intToByte(int num) {
+		return (byte)(num);
+	}
 }

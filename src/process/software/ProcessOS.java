@@ -5,5 +5,4 @@ public interface ProcessOS {
 	public void destory(long pid);
 	public void block(long pid);
 	public void awake(long pid);
-	
 }
