@@ -6,9 +6,9 @@ package memory.hardware;
  * @author suisui
  */
 public class Zone {
-	private int zoneSize;
+	private int zoneSize;// 内存块大小
 	private int head;// 内存块起址
-	private boolean isFree;
+	private boolean isFree;// 内存块是否空闲
 
 	public Zone(int head, int zoneSize) {
 		this.head = head;
