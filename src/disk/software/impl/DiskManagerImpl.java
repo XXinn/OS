@@ -5,6 +5,7 @@ import org.junit.Test;
 import disk.hardware.Disk;
 import disk.hardware.DiskBlock;
 import disk.hardware.FAT;
+import disk.hardware.FileStruct;
 import disk.software.DiskManager;
 import myUtil.Number;
 
@@ -87,6 +88,10 @@ public class DiskManagerImpl implements DiskManager{
 		fatItem[pos]=-1;
 		return startPos;
 	}
+	/**
+	 * 给定FAT的起点和文件的长度
+	 * 将文件读取出来成流式文件
+	 */
 	@Override
 	public byte[] getFile(int start,int len) {
 		// TODO Auto-generated method stub
@@ -107,5 +112,105 @@ public class DiskManagerImpl implements DiskManager{
 			pos = Number.byteToInt(fat[pos]);
 		}
 		return ans;
+		
+	}
+
+	/**
+	 * 删除FAT中的分配信息
+	 */
+	@Override
+	public void removeFile(int start) {
+		// TODO Auto-generated method stub
+		int pos=start;
+		byte []fat = diskOS.getFatTable().getFatItem();
+		while(pos!=255) {
+			fat[pos]=0;
+			pos = Number.byteToInt(fat[pos]);
+		}
+	}
+
+	@Override
+	public int getFreeStructPos(int bnum) {
+		// TODO Auto-generated method stub
+		byte []disk = diskOS.getDisk().getDisk()[bnum].getDiskblock();
+		for(int i=0;i<64;i+=8) {
+			if(disk[i]=="$".getBytes()[0]) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	public void addStruct(int bnum, int pnum, FileStruct fileStruct) {
+		// TODO Auto-generated method stub
+		//文件结构是8个字节的
+		
+		/**
+		 * 格式如下:
+		 * 名字[0]
+		 * 名字[1]
+		 * 名字[2]
+		 * 类型[0]
+		 * 属性[0]
+		 * 起点[0]
+		 * 长度[0] 低位
+		 * 长度[1] 高位
+		 */
+		byte[] fileByte=new byte[]{
+			fileStruct.getName().getBytes()[0],
+			fileStruct.getName().getBytes()[1],
+			fileStruct.getName().getBytes()[2],
+			fileStruct.getType().getBytes()[0],
+			fileStruct.getFileAttribute(),
+			fileStruct.getStartPos(),
+			(byte)(fileStruct.getFileLength()),
+			(byte)(fileStruct.getFileLength()>>8)
+		};
+		for(int i =0;i<8;i++) {
+			diskOS.getDisk().getDisk()[bnum].getDiskblock()[pnum+i]=fileByte[i];
+		}
+	}
+	@Test
+	public void Test() {
+		FileStruct fileStruct = new FileStruct();
+		fileStruct.setName("abc");
+		fileStruct.setType("c");
+		fileStruct.setFileAttribute((byte)10);
+		fileStruct.setStartPos((byte)10);
+		addStruct(4, 0, fileStruct);
+		byte[]disk=diskOS.getDisk().getDisk()[4].getDiskblock();
+		for(int i=0;i<16;i++) {
+			System.out.println("i:"+i+" "+Number.byteToInt(disk[i]));
+		}
+		FileStruct file2=getFileStruct(4, 0);
+		System.out.println("hello"+file2.getName()+" "+file2.getType()+" "+file2.getFileAttribute());
+	}
+	
+	
+	@Override
+	public void delStruct(int bnum, int pnum, FileStruct fileStruct) {
+		// TODO Auto-generated method stub
+		for(int i =0;i<8;i++) {
+			diskOS.getDisk().getDisk()[bnum].getDiskblock()[pnum+i]="$".getBytes()[0];
+		}
+	}
+
+	@Override
+	public FileStruct getFileStruct(int bnum, int pnum) {
+		// TODO Auto-generated method stub
+		FileStruct fileStruct  = new FileStruct();
+		byte []disk = diskOS.getDisk().getDisk()[bnum].getDiskblock();
+		fileStruct.setName(new String(new byte[] {
+				disk[pnum],disk[pnum+1],disk[pnum+2]
+		}));
+		fileStruct.setType(new String(new byte[] {
+				disk[pnum+3]
+		}));
+		fileStruct.setFileAttribute(disk[pnum+4]);
+		fileStruct.setStartPos(disk[5]);
+		short x = (short)((short)disk[7]<<8+(short)disk[6]);
+		fileStruct.setFileLength(x);
+		return fileStruct;
 	}
 }

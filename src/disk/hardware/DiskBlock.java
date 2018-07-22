@@ -15,7 +15,9 @@ public class DiskBlock  implements Serializable{
 	 * @author Zhanbiao_Zhu
 	 */
 	private byte[] diskblock = new byte[Number.lenOfDiskBlock];
-	
+	public DiskBlock() {
+			for(int i =0;i<Number.lenOfDiskBlock;i++)diskblock[i]="$".getBytes()[0];
+	}
 	public byte[] getDiskblock() {
 		return diskblock;
 	}

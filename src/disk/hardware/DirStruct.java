@@ -1,6 +1,8 @@
 package disk.hardware;
 
 public class DirStruct extends FileStruct {
-	private String type="  ";
-	private byte fileLength=0;
+	public DirStruct() {
+		setType(" ");
+		setFileLength((short)0);
+	}
 }
