@@ -4,7 +4,7 @@ package memory.hardware;
 public class PCB {
 
 	private int id;  //不知做什么用
-	private int state; //进程状态0就绪，1阻塞，2完成
+	private int state; //状态
 	private int priority;  //优先级
 	private int runnedTime;  //运行的时间
 	private int waitedTime;  //等待的时间
@@ -18,17 +18,6 @@ public class PCB {
 	private long startPos; //start代表起点
 	private long length; //length代表这个进程的大小
 
-	public PCB(int id, int state, int ax, int psw, int pc, int ir, long startPos, long length) {
-		super();
-		this.id = id;
-		this.state = state;
-		this.ax = ax;
-		this.psw = psw;
-		this.pc = pc;
-		this.ir = ir;
-		this.startPos = startPos;
-		this.length = length;
-	}
 	public int getId() {
 		return id;
 	}
