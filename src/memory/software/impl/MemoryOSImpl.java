@@ -3,6 +3,7 @@ package memory.software.impl;
 import java.util.LinkedList;
 
 import memory.hardware.MemoryTable;
+import memory.hardware.OpenFileItem;
 import memory.hardware.PCB;
 import memory.hardware.Zone;
 import memory.software.MemoryOS;
@@ -91,5 +92,35 @@ public class MemoryOSImpl implements MemoryOS {
 
 	public void remove() {
 
+	}
+
+	@Override
+	public boolean allocation(byte[] data, int kind, OpenFileItem openFileItem) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean allocationForFile(byte[] data, OpenFileItem openFileItem) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean allocationForProcess(byte[] data, OpenFileItem openFileItem) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void collection(OpenFileItem openFileItem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public byte[] getUserArea() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

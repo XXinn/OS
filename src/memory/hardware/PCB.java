@@ -18,8 +18,20 @@ public class PCB {
 	private long startPos; //start代表起点
 	private long length; //length代表这个进程的大小
 
+	
 	public int getId() {
 		return id;
+	}
+	public PCB(int id, int state, int ax, int psw, int pc, int ir, long startPos, long length) {
+		super();
+		this.id = id;
+		this.state = state;
+		this.ax = ax;
+		this.psw = psw;
+		this.pc = pc;
+		this.ir = ir;
+		this.startPos = startPos;
+		this.length = length;
 	}
 	public void setId(int id) {
 		this.id = id;
