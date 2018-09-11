@@ -1,16 +1,11 @@
-package process.software;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+package process.hardware.imp;
 
 import memory.hardware.PCB;
 import myUtil.Number;
-import process.software.impl.Controller;
+import process.hardware.ProcessOS;
 
-public class Process implements ProcessOS{
-	public Process() {
+public class ProcessOSImp  implements ProcessOS {
+	public ProcessOSImp() {
 	}
 	
 	//新建进程，进程初始化

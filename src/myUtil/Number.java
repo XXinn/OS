@@ -12,14 +12,14 @@ public class Number {
 	public static int lenOfDisk=256;
 	public static int sizeOfUserArea=512;
 	//进程状态
-	public static int stateReady = 0;
-	public static int stateRunning = 1;
-	public static int stateBlocking =2;
+	public static final int PROCESS_READY = 0;
+	public static final int PROCESS_RUNNING = 1;
+	public static final int PROCESS_BLOCKING =2;
 	//中断类型
-	public static int noInterrupt = 0;
-	public static int deviceInterrupt = 1;
-	public static int timeInterrupt = 2;
-	public static int finishedInterrupt =3;
+	public static final short NO_INTERRUPT = 0;
+	public static final short DEVICE_INTERRUPT = 1;
+	public static final short TIME_INTERRUPT = 2;
+	public static final short FINISH_INTERRUPT =3;
 	
 	
 	public static int byteToInt(byte num) {
