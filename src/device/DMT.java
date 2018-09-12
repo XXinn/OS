@@ -7,7 +7,9 @@ import java.util.concurrent.CountDownLatch;
 import memory.hardware.PCB;
 
 public class DMT {
-	//设备占用信息
+	/*
+	 * 设备信息
+	 */
 	//占用设备的进程id
 	private PCB proceeID ;
 	//设备占用时间
@@ -16,6 +18,7 @@ public class DMT {
 	private int status = 0;
 
 	public void useDevice(PCB pcb,int time){
+		//设备占用的信息
 		this.proceeID = pcb;
 		this.useTime = time;
 	}
@@ -29,6 +32,7 @@ public class DMT {
 		this.proceeID = proceeID;
 	}
 	public void setUseTime(int useTime) throws InterruptedException{
+		//设置设备占用时间，并设置计时器
 		this.useTime = useTime;
 		CountDown countDown = new CountDown(useTime);
 	}
