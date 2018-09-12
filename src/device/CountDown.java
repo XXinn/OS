@@ -4,9 +4,13 @@ import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 import javax.print.attribute.standard.Finishings;
 import java.util.TimerTask;
+import process.hardware.Process;
 import device.*;
 
 public class CountDown {
+	/*
+	 * 计时器
+	 */
 	private int limitSec;
 	private int curSec;
 	public CountDown(int limitSec) throws InterruptedException{
@@ -21,10 +25,5 @@ public class CountDown {
 		timer.cancel();
 
 		//倒计时结束
-		/*
-		 * await();
-		 *
-		 */
-
 	}
 }
