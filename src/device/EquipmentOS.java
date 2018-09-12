@@ -1,8 +1,6 @@
 package device;
 import memory.hardware.PCB;
 import process.hardware.*;
-import process.hardware.Process;
-import process.software.impl.*;
 public class EquipmentOS {
 
 	public void apply(PCB pcb,Equipment num,int time){
